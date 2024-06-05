@@ -13,7 +13,7 @@ tm2_dio = Pin(26, Pin.OUT)
 tm3_clk = Pin(33, Pin.OUT)
 tm3_dio = Pin(25, Pin.OUT)
 
-# สร้างออบเจ็กต์ TM1637 สำหรับแต่ละ 7-segment display
+# สร้างออบเจ็กต์ TM1637 สำหรับแต่ละ 7-segment display #
 tm1 = tm1637.TM1637(clk=tm1_clk, dio=tm1_dio)
 tm2 = tm1637.TM1637(clk=tm2_clk, dio=tm2_dio)
 tm3 = tm1637.TM1637(clk=tm3_clk, dio=tm3_dio)
