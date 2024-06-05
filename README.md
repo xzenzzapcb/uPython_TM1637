@@ -53,3 +53,7 @@
 7.วนลูปเพื่ออ่านค่าแรงดันจากช่อง ADC ทั้ง 3 ช่องและแสดงหมายเลขที่คำนวณได้บน 7-segment display แต่ละตัว
 
 8.เมื่อโปรแกรมหยุดทำงาน (โดยการกด Ctrl+C) จะเคลียร์หน้าจอทุก 7-segment display
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=xzenzzapcb/uPython_TM1637&type=Date)](https://star-history.com/#xzenzzapcb/uPython_TM1637&Date)
