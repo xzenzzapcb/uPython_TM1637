@@ -10,7 +10,6 @@
 
 2.เพื่อควบคุม 3 ตัว 4-digit 7-segment display:
 
-
 ![Alt](https://repobeats.axiom.co/api/embed/f0d36e5660126b9dca48f5a745191bbcfd1be3dc.svg "Repobeats analytics image")
 
 เพิ่มการอ่านค่าจาก IC ADS1115 และนำค่า ADC 3 ช่องมาแสดงผลบน 4-digit 7-segment display ทั้ง 3 ตัว
