@@ -13,7 +13,7 @@ tm2_dio = Pin(26, Pin.OUT)
 tm3_clk = Pin(33, Pin.OUT)
 tm3_dio = Pin(25, Pin.OUT)
 
-# สร้างออบเจ็กต์ TM1637 สำหรับแต่ละ 7-segment display #
+# สร้างออบเจ็กต์ TM1637 สำหรับแต่ละ 7-segment display
 tm1 = tm1637.TM1637(clk=tm1_clk, dio=tm1_dio)
 tm2 = tm1637.TM1637(clk=tm2_clk, dio=tm2_dio)
 tm3 = tm1637.TM1637(clk=tm3_clk, dio=tm3_dio)
@@ -32,22 +32,32 @@ def display_number(tm, number):
 
 # ฟังก์ชันสำหรับอ่านค่าแรงดันจากช่อง ADC
 def read_voltage(channel):
-    raw = ads.read(channel)
+    raw = ads.read(channel, gain=1)  # อ่านค่า ADC
     voltage = raw * 4.096 / 32768  # คำนวณแรงดันจากค่า ADC
     return voltage
 
 
+# ฟังก์ชันสำหรับแปลงแรงดันเป็นกระแส 4-20mA
+def voltage_to_current(voltage):
+    current = (voltage - 0.5) * (20 - 4) / (3.3 - 0.5) + 4
+    return current
+
+
 try:
-    # อ่านค่าแรงดันและแสดงบน 7-segment display แต่ละตัว
+    # อ่านค่าแรงดันและแปลงเป็นกระแส จากนั้นแสดงบน 7-segment display แต่ละตัว
     while True:
         voltage1 = read_voltage(0)  # อ่านแรงดันจากช่อง ADC 0
         voltage2 = read_voltage(1)  # อ่านแรงดันจากช่อง ADC 1
         voltage3 = read_voltage(2)  # อ่านแรงดันจากช่อง ADC 2
 
-        # แปลงแรงดันเป็นตัวเลขสำหรับแสดงผล
-        display_number(tm1, int(voltage1 * 1000))
-        display_number(tm2, int(voltage2 * 1000))
-        display_number(tm3, int(voltage3 * 1000))
+        current1 = voltage_to_current(voltage1)
+        current2 = voltage_to_current(voltage2)
+        current3 = voltage_to_current(voltage3)
+
+        # แปลงกระแสเป็นตัวเลขสำหรับแสดงผล
+        display_number(tm1, int(current1 * 100))
+        display_number(tm2, int(current2 * 100))
+        display_number(tm3, int(current3 * 100))
 
         sleep(1)  # หน่วงเวลา 1 วินาที
 except KeyboardInterrupt:
